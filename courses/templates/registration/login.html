@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Login</h1>
+<div class="module">
+    {% if form.error %}
+    <p>Login Error</p>
+    {% else %}
+    <p>Login Here</p>
+    {% endif %}
+</div>
+<div class="form-login">
+    <form action=" url 'login' " method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="hidden" name="next" value="{{next}}">
+    <p><input type="submit" value="Login"></p>
+    </form>
+</div>
+
+</body>
+</html>
+{% endblock %}

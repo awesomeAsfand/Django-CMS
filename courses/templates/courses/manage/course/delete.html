@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block title %} Delete Course {%endblock%}
+{% block content %}
+</head>
+<body>
+<h1>Delete Course "{{object.title}}"</h1>
+<div class="module">
+    <form method="post" action="">
+        {% csrf_token %}
+        <p>Are you sure you want to delete '{{object}}'</p>
+        <input type="submit" value="Confirm">
+    </form>
+</div>
+
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Logout{%endblock%}</title>
+</head>
+<body>
+<h1>Logout</h1>
+<div class="module">
+    <p>You have Loged out </p>
+    <a href="{%url 'login'%}">Login</a>
+</div>
+
+</body>
+</html>
+{% endblock %}
