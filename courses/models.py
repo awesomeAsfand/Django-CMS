@@ -23,6 +23,7 @@ class Course(models.Model):
     slug = models.SlugField(unique=True, max_length=200)
     overview = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    students = models.ManyToManyField(User, related_name='courses_joined', blank=True)
 
     class Meta:
         ordering = ['-created']
@@ -33,7 +34,7 @@ class Course(models.Model):
 
 class Module(models.Model):
     course = models.ForeignKey(Course, related_name='modules', on_delete=models.CASCADE)
-    order = OrderField(blank=True, for_fields=['courses'])
+    order = OrderField(blank=True, for_fields=['course'])
     title = models.CharField(max_length=200)
     description = models.TextField()
 
@@ -63,6 +64,9 @@ class Content(models.Model):
         ordering = ['order']
 
 
+from django.template.loader import render_to_string
+
+
 class ItemBase(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_related')
     title = models.CharField(max_length=250)
@@ -74,6 +78,9 @@ class ItemBase(models.Model):
 
     def __str__(self):
         return self.title
+
+    def render(self):
+        return render_to_string(f'courses/content/{self._meta.model_name}.html', {'item': self})
 
 
 class Text(ItemBase):
@@ -90,4 +97,3 @@ class Image(ItemBase):
 
 class Video(ItemBase):
     url = models.URLField()
-

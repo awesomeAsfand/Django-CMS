@@ -15,16 +15,17 @@
     {% else %}
     <p>Login Here</p>
     {% endif %}
-</div>
-<div class="form-login">
-    <form action=" url 'login' " method="post">
+<div class="login-form">
+    <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     {{form.as_p}}
     <input type="hidden" name="next" value="{{next}}">
+        #  input field is used to store the next URL that the user should be redirected to after logging in.
+        This is useful if the user was trying to access a page that they needed to be logged in to view.
     <p><input type="submit" value="Login"></p>
     </form>
 </div>
-
+</div>
 </body>
 </html>
 {% endblock %}
